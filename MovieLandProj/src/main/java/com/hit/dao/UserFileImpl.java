@@ -1,21 +1,19 @@
 package com.hit.dao;
 
 import com.hit.dm.movie.Movie;
+import com.hit.dm.user.User;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class MovieFileImpl implements IDao<Integer, Movie> {
-
-    //TODO dont forget to close file
-
+public class UserFileImpl implements IDao<Integer , User>{
     private String m_file_path;
     private ObjectOutputStream m_objectOutputStream;
     private ObjectInputStream m_objectInputStream;
 
-    public MovieFileImpl(String file_path) {
+    public UserFileImpl(String file_path) {
         this.m_file_path = file_path;
         boolean isEmptyFile = isEmptyDb();
         try {
@@ -53,38 +51,36 @@ public class MovieFileImpl implements IDao<Integer, Movie> {
         }
     }
 
-
     @Override
-    public List<Movie> getAll() throws IllegalArgumentException, IOException, ClassNotFoundException {
-        List<Movie> allMoviesList = new ArrayList<>();
+    public List<User> getAll() throws IllegalArgumentException, IOException, ClassNotFoundException {
+        List<User> allUsers = new ArrayList<>();
         try {
             while (true) {
-                Movie movieFromDb = (Movie) m_objectInputStream.readObject();
-                allMoviesList.add(movieFromDb);
+                User userFromDb = (User) m_objectInputStream.readObject();
+                allUsers.add(userFromDb);
             }
         } catch (EOFException eofe) {
             System.out.println(eofe.getMessage());
         } finally {
             closeObjectInputStream();
         }
-        return allMoviesList;
-    } //V
-
+        return allUsers;
+    }
 
     @Override
-    public List<Movie> getElementsByCount(List<Movie> elementsList, int elementsCount) throws IllegalArgumentException, NullPointerException {
-        List<Movie> allMoviesList = new ArrayList<>();
+    public List<User> getElementsByCount(List<User> elementsList, int elementsCount) throws IllegalArgumentException, NullPointerException {
+        List<User> allUserList = new ArrayList<>();
         int i = 0;
         try {
             while (i < elementsCount) {
-                Movie movieFromDb = (Movie) m_objectInputStream.readObject();
-                allMoviesList.add(movieFromDb);
+                User userFromDb = (User) m_objectInputStream.readObject();
+                allUserList.add(userFromDb);
                 i++;
             }
             closeObjectInputStream();
         } catch (EOFException eof) {
-            if (allMoviesList.size() < elementsCount) {
-                System.out.println("there are only" + allMoviesList.size());
+            if (allUserList.size() < elementsCount) {
+                System.out.println("there are only" + allUserList.size());
                 closeObjectInputStream();
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -92,25 +88,24 @@ public class MovieFileImpl implements IDao<Integer, Movie> {
         } finally {
             closeObjectInputStream();
         }
-        return allMoviesList;
-    } //V
-
-    @Override
-    public Movie getElementById(Integer elementId) throws NoSuchElementException, IOException, ClassNotFoundException {
-        List<Movie> allMovies = getAll();
-        for (Movie movie : allMovies) {
-            if (movie.getMovieId() == elementId) {
-                return movie;
-            }
-        }
-        throw new NoSuchElementException("Movie with ID " + elementId + " not found");
+        return allUserList;
     }
 
     @Override
-    public void addElement(Movie movie) throws IOException, Exception {
+    public User getElementById(Integer elementId) throws NoSuchElementException, IOException, ClassNotFoundException {
+        List<User> allUserList = getAll();
+        for (User user : allUserList) {
+            if (user.getUserId() == elementId) {
+                return user;
+            }
+        }
+        throw new NoSuchElementException("user with ID " + elementId + " not found");
+    }
+
+    @Override
+    public void addElement(User user) throws IOException, Exception {
         try {
-            m_objectOutputStream = new ObjectOutputStream(new FileOutputStream(m_file_path));
-            m_objectOutputStream.writeObject(movie);
+            m_objectOutputStream.writeObject(user);
             m_objectOutputStream.flush();
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
@@ -121,30 +116,29 @@ public class MovieFileImpl implements IDao<Integer, Movie> {
 
 
     @Override
-    public void deleteElement(Movie movieToDelete) throws IOException, Exception {
-        List<Movie> allMovies = getAll();
-        if (allMovies.contains(movieToDelete)) {
-            allMovies.remove(movieToDelete);
-            updateElementsInFile(allMovies,m_file_path);
+    public void deleteElement(User objectToDelete) throws IOException, Exception {
+        List<User> allUsers = getAll();
+        if (allUsers.contains(objectToDelete)) {
+            allUsers.remove(objectToDelete);
+            updateElementsInFile(allUsers,m_file_path);
             closeObjectOutStream();
         } else {
-            throw new IllegalArgumentException("Movie not found: " + movieToDelete);
+            throw new IllegalArgumentException("User not found: " + objectToDelete);
         }
     }
-
-
-
 
     @Override
-    public void updateElement(Movie movieToUpdate) throws IOException, Exception {
-        List<Movie> allMovies = getAll();
-        if (allMovies.contains(movieToUpdate)) {
-            updateElementsInFile(allMovies,m_file_path);
+    public void updateElement(User userToUpdate) throws IOException, Exception {
+        List<User> allUsers = getAll();
+        if (allUsers.contains(userToUpdate)) {
+            updateElementsInFile(allUsers,m_file_path);
             closeObjectOutStream();
         } else {
-            throw new IllegalArgumentException("Movie not found: " + movieToUpdate);
+            throw new IllegalArgumentException("user not found: " + userToUpdate);
         }
     }
+
+
 
     private boolean isEmptyDb() {
         File dbMovieFile = new File(m_file_path);

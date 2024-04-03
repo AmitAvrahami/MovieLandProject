@@ -3,7 +3,9 @@ package com.hit.dm.user;
 import com.hit.dm.movie.Movie;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class User implements Serializable {
 
@@ -11,10 +13,10 @@ public class User implements Serializable {
     private String m_userName;
     private String m_userPassword;
     private PermissionLevel m_permissionLevel;
-    private List<Movie> m_userMovieWatchList;
+    private HashMap<Movie, Boolean> m_userMovieWatchList;
 
 
-    public User(Integer userId, String m_userName, String userPassword, PermissionLevel permissionLevel, List<Movie> userMovieWatchList) {
+    public User(Integer userId, String m_userName, String userPassword, PermissionLevel permissionLevel,  HashMap<Movie, Boolean> userMovieWatchList) {
         this.m_userId = userId;
         this.m_userName = m_userName;
         this.m_userPassword = userPassword;
@@ -54,11 +56,11 @@ public class User implements Serializable {
         this.m_permissionLevel = m_permissionLevel;
     }
 
-    public List<Movie> getUserMovieWatchList() {
+    public  HashMap<Movie, Boolean> getUserMovieWatchList() {
         return m_userMovieWatchList;
     }
 
-    public void setUserMovieWatchList(List<Movie> m_userMovieWatchList) {
+    public void setUserMovieWatchList(HashMap<Movie, Boolean> m_userMovieWatchList) {
         this.m_userMovieWatchList = m_userMovieWatchList;
     }
 }

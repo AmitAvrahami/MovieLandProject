@@ -23,6 +23,10 @@ public class Actor implements Serializable {
         this.actorMovies = actorMovies;
     }
 
+    public Actor() {
+
+    }
+
     public Integer getActorId() {
         return actorId;
     }
