@@ -15,7 +15,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         // Initialize MovieService
-        MovieService movieService = new MovieService(new RabinCarpStringMatchingImpl(), "moviedatasource.txt");
+        MovieService movieService = new MovieService(new RabinCarpStringMatchingImpl(), "MovieLandProj/src/main/resources/moviedatasource.txt");
 
         // Creating actors
         Actor actor1 = new Actor(1, "John", "Doe", 30, new ArrayList<>());

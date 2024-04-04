@@ -1,6 +1,5 @@
 package com.hit.dao;
 
-import com.hit.dm.movie.Movie;
 import com.hit.dm.user.User;
 
 import java.io.*;
@@ -8,26 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class UserFileImpl implements IDao<Integer , User>{
-    private String m_file_path;
+public class UserFileImpl implements IDao<Integer, User> {
+    private String m_filePath;
     private ObjectOutputStream m_objectOutputStream;
     private ObjectInputStream m_objectInputStream;
 
-    public UserFileImpl(String file_path) {
-        this.m_file_path = file_path;
+    public UserFileImpl(String filePath) {
+        this.m_filePath = filePath;
         boolean isEmptyFile = isEmptyDb();
         try {
             if (isEmptyFile) {
-                this.m_objectOutputStream = new ObjectOutputStream(new FileOutputStream(m_file_path));
-                m_objectOutputStream.writeObject(new Movie());
-                m_objectOutputStream.flush();
-                closeObjectOutStream();
+                this.m_objectOutputStream = new ObjectOutputStream(new FileOutputStream(m_filePath));
             } else {
-                this.m_objectInputStream = new ObjectInputStream(new FileInputStream(m_file_path));
-                closeObjectInputStream();
+                this.m_objectInputStream = new ObjectInputStream(new FileInputStream(m_filePath));
             }
         } catch (IOException e) {
-            System.out.println("file not open");
+            System.out.println("Error opening file: " + e.getMessage());
         }
     }
 
@@ -36,17 +31,17 @@ public class UserFileImpl implements IDao<Integer , User>{
             try {
                 m_objectInputStream.close();
             } catch (IOException e) {
-                System.out.println("IO exception");
+                System.out.println("Error closing input stream: " + e.getMessage());
             }
         }
     }
 
-    private void closeObjectOutStream() {
+    private void closeObjectOutputStream() {
         if (m_objectOutputStream != null) {
             try {
                 m_objectOutputStream.close();
             } catch (IOException e) {
-                System.out.println("IO exception");
+                System.out.println("Error closing output stream: " + e.getMessage());
             }
         }
     }
@@ -60,46 +55,29 @@ public class UserFileImpl implements IDao<Integer , User>{
                 allUsers.add(userFromDb);
             }
         } catch (EOFException eofe) {
-            System.out.println(eofe.getMessage());
+            // Reached end of file
         } finally {
             closeObjectInputStream();
         }
         return allUsers;
     }
 
-    @Override
-    public List<User> getElementsByCount(List<User> elementsList, int elementsCount) throws IllegalArgumentException, NullPointerException {
-        List<User> allUserList = new ArrayList<>();
-        int i = 0;
-        try {
-            while (i < elementsCount) {
-                User userFromDb = (User) m_objectInputStream.readObject();
-                allUserList.add(userFromDb);
-                i++;
-            }
-            closeObjectInputStream();
-        } catch (EOFException eof) {
-            if (allUserList.size() < elementsCount) {
-                System.out.println("there are only" + allUserList.size());
-                closeObjectInputStream();
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException("Error reading movie from database", e);
-        } finally {
-            closeObjectInputStream();
-        }
-        return allUserList;
-    }
+
 
     @Override
     public User getElementById(Integer elementId) throws NoSuchElementException, IOException, ClassNotFoundException {
-        List<User> allUserList = getAll();
-        for (User user : allUserList) {
-            if (user.getUserId() == elementId) {
-                return user;
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(m_filePath))) {
+            User userFromDb;
+            while (true) {
+                userFromDb = (User) objectInputStream.readObject();
+                if (userFromDb.getUserId() == elementId) {
+                    return userFromDb;
+                }
             }
+        } catch (EOFException eofe) {
+            // End of file reached, user not found
+            throw new NoSuchElementException("User with ID " + elementId + " not found");
         }
-        throw new NoSuchElementException("user with ID " + elementId + " not found");
     }
 
     @Override
@@ -108,20 +86,18 @@ public class UserFileImpl implements IDao<Integer , User>{
             m_objectOutputStream.writeObject(user);
             m_objectOutputStream.flush();
         } catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        } finally {
-            closeObjectOutStream();
+            System.out.println("Error writing user to file: " + ioe.getMessage());
+        }finally {
+            closeObjectOutputStream();
         }
     }
-
 
     @Override
     public void deleteElement(User objectToDelete) throws IOException, Exception {
         List<User> allUsers = getAll();
         if (allUsers.contains(objectToDelete)) {
             allUsers.remove(objectToDelete);
-            updateElementsInFile(allUsers,m_file_path);
-            closeObjectOutStream();
+            updateElementsInFile(allUsers, m_filePath);
         } else {
             throw new IllegalArgumentException("User not found: " + objectToDelete);
         }
@@ -131,17 +107,14 @@ public class UserFileImpl implements IDao<Integer , User>{
     public void updateElement(User userToUpdate) throws IOException, Exception {
         List<User> allUsers = getAll();
         if (allUsers.contains(userToUpdate)) {
-            updateElementsInFile(allUsers,m_file_path);
-            closeObjectOutStream();
+            updateElementsInFile(allUsers, m_filePath);
         } else {
-            throw new IllegalArgumentException("user not found: " + userToUpdate);
+            throw new IllegalArgumentException("User not found: " + userToUpdate);
         }
     }
 
-
-
     private boolean isEmptyDb() {
-        File dbMovieFile = new File(m_file_path);
-        return !dbMovieFile.exists() || dbMovieFile.length() == 0;
+        File dbUserFile = new File(m_filePath);
+        return !dbUserFile.exists() || dbUserFile.length() == 0;
     }
 }

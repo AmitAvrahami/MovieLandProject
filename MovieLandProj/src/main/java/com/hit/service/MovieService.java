@@ -23,7 +23,7 @@ interface IMovieService {
 
     Movie randomSelectionOfMovieByCategory(MovieCategory movieCategory);
 
-    void getAllMoviesFromDb() throws IOException, ClassNotFoundException;
+    List<Movie> getAllMoviesFromDb() throws IOException, ClassNotFoundException;
 
     void rateAMovie(Integer movieId, MovieRateRange movieRateRange) throws IOException, ClassNotFoundException;
 
@@ -67,9 +67,9 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public void getAllMoviesFromDb() throws IOException, ClassNotFoundException {
+    public List<Movie> getAllMoviesFromDb() throws IOException, ClassNotFoundException {
         m_allMovies = dao.getAll();
-        notifyAll();
+        return m_allMovies;
     }
 
 
@@ -150,7 +150,6 @@ public class MovieService implements IMovieService {
         try {
             dao.addElement(movieToAdd);
             m_allMovies.add(movieToAdd);
-            notifyAll();
         } catch (IOException e) {
            System.out.println("can read io problem");
         } catch (Exception e) {
