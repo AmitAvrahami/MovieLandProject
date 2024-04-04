@@ -2,13 +2,13 @@ package com.hit.dm.movie;
 
 import com.hit.dm.actor.Actor;
 
-import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
-public class Movie implements Serializable {
+public class Movie implements Serializable, Comparable<Movie> {
     private static Integer countOfRating = 0;
     private Integer m_movieId;
     private String m_movieName;
@@ -108,6 +108,30 @@ public class Movie implements Serializable {
             stringBuilder.append("\t").append(actor).append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o != null || getClass() != o.getClass()) {
+            Movie movie = (Movie) o;
+            if (Objects.equals(m_movieId, movie.m_movieId) && Objects.equals(m_movieName, movie.m_movieName) && Objects.equals(m_movieRate.size(), movie.m_movieRate.size()) && Objects.equals(m_movieSynopsis, movie.m_movieSynopsis) && Objects.equals(m_movieCategory, movie.m_movieCategory) && Objects.equals(m_movieTime, movie.m_movieTime) && Objects.equals(m_movieActors.size(), movie.m_movieActors.size()))
+                return true;
+
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(m_movieId, m_movieName, m_movieRate, m_movieSynopsis, m_movieCategory, m_movieTime, m_movieActors);
+    }
+
+
+
+    @Override
+    public int compareTo(Movie otherMovie) {
+        return Integer.compare(this.getMovieId(), otherMovie.getMovieId());
     }
 }
 

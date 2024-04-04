@@ -18,7 +18,6 @@ public class MovieFileImpl implements IDao<Integer, Movie> {
         this.m_file_path = file_path;
         if (isEmptyDb()) {
             try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(m_file_path))) {
-                // Write an empty list as the initial content
                 objectOutputStream.writeObject(new ArrayList<Movie>());
             } catch (IOException e) {
                 System.out.println("Failed to create new database file: " + e.getMessage());

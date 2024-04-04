@@ -8,9 +8,7 @@ import com.hit.dm.movie.MovieCategory;
 import com.hit.dm.movie.MovieRateRange;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 interface IMovieService {
     List<Movie> searchMoviesByGenre(MovieCategory movieCategory);
@@ -19,7 +17,7 @@ interface IMovieService {
 
     List<Actor> getActorsByMovie(Movie movie);
 
-    List<Movie> getMoviesByActorFullName(String name, String lastName);
+    List<Movie> getMoviesByActorFullName(String name, String lastName)throws Exception;
 
     Movie randomSelectionOfMovieByCategory(MovieCategory movieCategory);
 
@@ -31,7 +29,7 @@ interface IMovieService {
 
     void addMovie(Movie movieToAdd) throws Exception;
 
-    void updateMovie(Movie movie) throws Exception;
+    void updateMovie(Movie movie) throws Exception,IOException;
 
 }
 
@@ -46,7 +44,12 @@ public class MovieService implements IMovieService {
         this.m_stringMatchingAlgorithm = m_stringMatchingAlgorithm;
         this.m_filePath = filePath;
         this.dao = new MovieFileImpl(filePath);
-        this.m_allMovies = new ArrayList<>();
+        try{
+            this.m_allMovies = dao.getAll();
+
+        } catch (IOException | ClassNotFoundException e) {
+           System.out.println("doesnt get all movies from the dao");
+        }
     }
 
 
@@ -135,15 +138,33 @@ public class MovieService implements IMovieService {
         Movie movieToRate = dao.getElementById(movieId);
         if (movieToRate != null) {
             movieToRate.getMovieRate().add(movieRateRange);
+            try {
+                updateMovie(movieToRate);
+
+            } catch (Exception e) {
+                System.out.println("doesnt update");
+            }
         } else {
             System.out.println("movie with id" + movieId + "not found");
         }
     }
-
     @Override
     public void removeMovie(Movie movieToRemove) throws Exception {
-        dao.deleteElement(movieToRemove);
+        if (!m_allMovies.contains(movieToRemove)) {
+            throw new Exception("Movie not found: " + movieToRemove);
+        }
+
+        try {
+            dao.deleteElement(movieToRemove);
+            m_allMovies.remove(movieToRemove);
+            Collections.sort(m_allMovies);
+        } catch (Exception e) {
+            // Handle any exceptions thrown by dao.deleteElement(movieToRemove)
+            // For example, you can log the exception or rethrow it if necessary
+            throw new Exception("Failed to remove movie: " + e.getMessage(), e);
+        }
     }
+
 
     @Override
     public void addMovie(Movie movieToAdd) {
@@ -158,10 +179,27 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public void updateMovie(Movie movie) throws Exception {
-        dao.updateElement(movie);
-        m_allMovies.remove(movie);
+    public void updateMovie(Movie movie) throws Exception,IOException{
+        boolean found = false;
+        for (Movie movie1 : m_allMovies) {
+            if (movie1.getMovieId().equals(movie.getMovieId())) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            throw new Exception("Movie with ID " + movie.getMovieId() + " does not exist.");
+        }
+        try {
+            dao.updateElement(movie);
+            m_allMovies.removeIf(movie1 -> movie1.getMovieId().equals(movie.getMovieId()));
+            m_allMovies.add(movie);
+            Collections.sort(m_allMovies);
+        } catch (Exception e) {
+            throw new IOException("Failed to update movie: " + e.getMessage(), e);
+        }
     }
+
 
     @Override
     public List<Actor> getActorsByMovie(Movie actorsFromMovie) {
@@ -177,19 +215,25 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public List<Movie> getMoviesByActorFullName(String name, String lastName) {
+    public List<Movie> getMoviesByActorFullName(String name, String lastName) throws Exception {
         List<Movie> moviesByActorName = new ArrayList<>();
-        for (Movie movie : m_allMovies) {
-            for (Actor actor : movie.getMovieActors()) {
-                if (actor.getActorName() == name && actor.getActorLastName() == lastName) {
-                    moviesByActorName.add(movie);
-                    break;
+        try {
+            for (Movie movie : m_allMovies) {
+                for (Actor actor : movie.getMovieActors()) {
+                    if (actor.getActorName() == name && actor.getActorLastName() == lastName) {
+                        moviesByActorName.add(movie);
+                        break;
+                    }
                 }
             }
+        }catch (Exception e){
+            throw new NoSuchElementException();
         }
+
         if (moviesByActorName.isEmpty())
             return null;
         else return moviesByActorName;
     }
+
 
 }

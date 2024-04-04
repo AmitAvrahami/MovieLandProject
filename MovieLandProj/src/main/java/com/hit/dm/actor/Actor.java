@@ -6,6 +6,7 @@ import java.awt.*;
 import java.io.Serializable;
 import java.io.StringReader;
 import java.util.List;
+import java.util.Objects;
 
 public class Actor implements Serializable {
 
@@ -76,5 +77,20 @@ public class Actor implements Serializable {
                 ", actorAge=" + actorAge +
                 ", actorMovies=" + actorMovies +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) {
+            Actor actor = (Actor) o;
+            return Objects.equals(actorId, actor.actorId) && Objects.equals(actorName, actor.actorName) && Objects.equals(actorLastName, actor.actorLastName) && Objects.equals(actorAge, actor.actorAge) && Objects.equals(actorMovies.size(), actor.actorMovies.size());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(actorId, actorName, actorLastName, actorAge, actorMovies);
     }
 }
