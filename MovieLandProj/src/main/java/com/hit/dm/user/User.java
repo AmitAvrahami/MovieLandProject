@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class User implements Serializable {
 
@@ -62,5 +63,18 @@ public class User implements Serializable {
 
     public void setUserMovieWatchList(HashMap<Movie, Boolean> m_userMovieWatchList) {
         this.m_userMovieWatchList = m_userMovieWatchList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(m_userId, user.m_userId) && Objects.equals(m_userName, user.m_userName) && Objects.equals(m_userPassword, user.m_userPassword) && m_permissionLevel == user.m_permissionLevel && Objects.equals(m_userMovieWatchList.size(), user.m_userMovieWatchList.size());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(m_userId, m_userName, m_userPassword, m_permissionLevel, m_userMovieWatchList);
     }
 }

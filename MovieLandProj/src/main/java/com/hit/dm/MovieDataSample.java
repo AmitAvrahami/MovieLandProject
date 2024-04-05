@@ -7,7 +7,7 @@ import com.hit.dm.movie.MovieCategory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataSample {
+public class MovieDataSample {
 
     // Creating actors
     private static final Actor actor1 = new Actor(1, "John", "Doe", 30, new ArrayList<>());

@@ -1,29 +1,25 @@
 package com.hit.service;
 
 
-import com.hit.dao.IDao;
 import com.hit.dao.UserFileImpl;
 import com.hit.dm.movie.Movie;
 import com.hit.dm.user.PermissionLevel;
 import com.hit.dm.user.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 interface IUserService  {
-    void getAllUsersFromDb() throws IOException, ClassNotFoundException;
+    List<User>  getAllUsersFromDb() throws IOException, ClassNotFoundException;
     User getUserById(int userId) throws IOException, ClassNotFoundException;
     void logout(User user);
     void register(User user) throws Exception;
-    void updateUser(User user);
-    void addToWatchlist(User user, Movie movie);
-    void removeFromWatchlist(User user, Movie movie);
-    void updateWatchlistStatus(User user, Movie movie);
-    void deleteUser(User user);
-    void changePassword(User user, String newPassword);
+    void updateUser(User user) throws Exception;
+    void addToWatchlist(User user, Movie movie) throws Exception;
+    void removeFromWatchlist(User user, Movie movie) throws Exception;
+    void updateWatchlistStatus(User user, Movie movie) throws Exception;
+    void deleteUser(User user) throws Exception;
+    boolean changePassword(User user, String newPassword) throws Exception;
     boolean login(String username, String password);
     boolean isAdmin(User user);
 
@@ -32,16 +28,30 @@ interface IUserService  {
 public class UserService implements IUserService {
     private UserFileImpl dao;
     private String m_filePath;
+
+
+
     private List<User> m_allUsers;
 
-    public UserService(String filePath) {
+    public UserService(String filePath) throws IOException {
         this.m_filePath = filePath;
         this.dao = new UserFileImpl(filePath);
+        try {
+            this.m_allUsers = getAllUsersFromDb();
+        } catch (ClassNotFoundException e) {
+            System.out.println("doesnt get all users from the dao");
+        }
+
     }
 
+    public List<User> getAllUsers() {
+       return m_allUsers;
+    }
     @Override
-    public void getAllUsersFromDb() throws IOException, ClassNotFoundException {
-        m_allUsers = dao.getAll();
+    public List<User> getAllUsersFromDb() throws IOException, ClassNotFoundException {
+        List<User> allUsers =  dao.getAll();
+        m_allUsers = allUsers;
+        return allUsers;
     }
 
     @Override
@@ -61,35 +71,30 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(User user) {
-        try{
+    public void updateUser(User user) throws Exception {
             dao.updateElement(user);
-        } catch (IOException e) {
-            System.out.println("cant read io");
-        } catch (Exception e) {
-            System.out.println("cant read");
-        }
+
     }
 
     @Override
-    public void addToWatchlist(User user, Movie movie) {
+    public void addToWatchlist(User user, Movie movie) throws Exception {
         user.getUserMovieWatchList().put(movie,false);
         updateUser(user);
     }
 
     @Override
-    public void removeFromWatchlist(User user, Movie movie) {
+    public void removeFromWatchlist(User user, Movie movie) throws Exception {
         HashMap<Movie, Boolean> watchlist = user.getUserMovieWatchList();
         if (watchlist.containsKey(movie)) {
             watchlist.remove(movie);
             updateUser(user);
         } else {
-            System.out.println("Movie is not in the watchlist.");
+            throw new NoSuchElementException();
         }
     }
 
     @Override
-    public void updateWatchlistStatus(User user, Movie movie) {
+    public void updateWatchlistStatus(User user, Movie movie) throws Exception {
         HashMap<Movie, Boolean> watchlist = user.getUserMovieWatchList();
         if (watchlist.containsKey(movie)){
             Boolean status =  watchlist.get(movie);
@@ -97,29 +102,24 @@ public class UserService implements IUserService {
             updateUser(user);
         }
         else{
-            System.out.println("Movie is not in the watchlist.");
+            throw new NoSuchElementException();
         }
     }
 
     @Override
-    public void deleteUser(User user) {
-        try{
-            dao.deleteElement(user);
-        } catch (IOException e) {
-            System.out.println("cant read");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public void deleteUser(User user) throws Exception {
+        dao.deleteElement(user);
 
     }
 
     @Override
-    public void changePassword(User user, String newPassword) {
+    public boolean changePassword(User user, String newPassword) throws Exception {
         if (user.getUserPassword()!=newPassword && !newPassword.isEmpty() && newPassword.length() > 3){
             user.setUserPassword(newPassword);
             updateUser(user);
+            return true;
         }
-        else System.out.println("cant change password");
+        return false;
     }
 
     @Override

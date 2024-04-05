@@ -1,34 +1,22 @@
 package com.hit.service;
 
 import com.hit.algorithm.RabinCarpStringMatchingImpl;
-import com.hit.dm.DataSample;
+import com.hit.dm.MovieDataSample;
 import com.hit.dm.actor.Actor;
 import com.hit.dm.movie.Movie;
 import com.hit.dm.movie.MovieCategory;
 import com.hit.dm.movie.MovieRateRange;
 import junit.framework.TestCase;
-import org.junit.Test;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class MovieServiceTest extends TestCase {
     MovieService movieService = new MovieService(new RabinCarpStringMatchingImpl(), "MovieLandProj/src/main/resources/moviedatasource.txt");
-    private final List<Movie> sampleMovies = DataSample.getSampleMovies();
+    private final List<Movie> sampleMovies = MovieDataSample.getSampleMovies();
 
 
-    public void writeSampleData() {
-        List<Movie> sampleMovies = DataSample.getSampleMovies();
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("MovieLandProj/src/main/resources/moviedatasource.txt"))) {
-            outputStream.writeObject(sampleMovies);
-            System.out.println("Sample data has been written.");
-        } catch (IOException e) {
-            System.out.println("Error writing sample data: " + e.getMessage());
-        }
-    }
 
     public void removeSampleData() {
         File file = new File("MovieLandProj/src/main/resources/moviedatasource.txt");
@@ -37,8 +25,11 @@ public class MovieServiceTest extends TestCase {
             // Write an empty list to the file
             oos.writeObject(new ArrayList<>());
             System.out.println("Sample data file has been cleared.");
+            Thread.sleep(1000);
         } catch (IOException e) {
             System.err.println("Failed to clear sample data file: " + e.getMessage());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -71,7 +62,6 @@ public class MovieServiceTest extends TestCase {
     }
 
     private boolean areMovieListsEqual(List<Movie> list1, List<Movie> list2) {
-        writeSampleData();
         if (list1.size() != list2.size()) {
             return false;
         }
@@ -101,7 +91,7 @@ public class MovieServiceTest extends TestCase {
     }
 
     public void testSearchMoviesByGenre() {
-        writeSampleData();
+        testAddMovie();
         List<Movie> allMoviesByGenre = movieService.searchMoviesByGenre(MovieCategory.ACTION);
         assertFalse("No movies found for genre " + MovieCategory.ACTION, allMoviesByGenre.isEmpty());
         for (Movie movie : allMoviesByGenre){
@@ -111,7 +101,7 @@ public class MovieServiceTest extends TestCase {
     }
 
     public void testSearchMoviesByMovieName() {
-        writeSampleData();
+        testAddMovie();
         String movieName = "Titanic";
         List<Movie> allMoviesByName = movieService.searchMoviesByMovieName(movieName);
         assertFalse("No movies found for movie name Titanic ", allMoviesByName.isEmpty());
@@ -122,12 +112,7 @@ public class MovieServiceTest extends TestCase {
     }
 
     public void testRandomSelectionOfMovieByCategory() {
-        writeSampleData();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        testAddMovie();
         Movie randomMovie = movieService.randomSelectionOfMovieByCategory(MovieCategory.FAMILY);
         assertEquals(MovieCategory.FAMILY,randomMovie.getMovieCategory());
         assertEquals(randomMovie.getClass(),Movie.class);
@@ -136,7 +121,7 @@ public class MovieServiceTest extends TestCase {
     }
 
     public void testRateAMovie() {
-        writeSampleData();
+        testAddMovie();
         try{
             movieService.rateAMovie(1, MovieRateRange.THREE);
             sampleMovies.get(0).getMovieRate().add(MovieRateRange.THREE);
@@ -155,7 +140,7 @@ public class MovieServiceTest extends TestCase {
     }
 
     public void testRemoveMovie() {
-        writeSampleData();
+        testAddMovie();
         Movie movieToRemove = sampleMovies.get(2);
         try {
             movieService.removeMovie(movieToRemove);
@@ -174,7 +159,7 @@ public class MovieServiceTest extends TestCase {
 
 
     public void testUpdateMovie() {
-        writeSampleData();
+        testAddMovie();
         Movie movieToUpdate = sampleMovies.get(4);
         movieToUpdate.setMovieName("Harry Potter");
         try {
@@ -189,7 +174,7 @@ public class MovieServiceTest extends TestCase {
     }
 
     public void testGetActorsByMovie() {
-        writeSampleData();
+        testAddMovie();
         Movie sampleMovie = sampleMovies.get(0);
         List<Actor> actorsByMovie = movieService.getActorsByMovie(sampleMovie);
         List<Actor> actorsFromMovie = sampleMovie.getMovieActors();
@@ -203,7 +188,7 @@ public class MovieServiceTest extends TestCase {
     }
 
     public void testGetMoviesByActorFullName() {
-        writeSampleData();
+        testAddMovie();
         String john = "John";
         String Doe = "Doe";
         try {
