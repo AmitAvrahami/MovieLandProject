@@ -21,11 +21,11 @@ public class Movie implements Serializable, Comparable<Movie> {
     public Movie(Integer m_movieId, String m_movieName, List<MovieRateRange> m_movieRate, String m_movieSynopsis, MovieCategory m_movieCategory, String m_movieTime, List<Actor> m_movieActors) {
         this.m_movieId = m_movieId;
         this.m_movieName = m_movieName;
-        this.m_movieRate = m_movieRate;
+        if (m_movieRate == null) this.m_movieRate = new ArrayList<>(); else this.m_movieRate = m_movieRate;
         this.m_movieSynopsis = m_movieSynopsis;
         this.m_movieCategory = m_movieCategory;
         this.m_movieTime = m_movieTime;
-        this.m_movieActors = m_movieActors;
+        if (m_movieActors == null) this.m_movieActors = new ArrayList<>(); else this.m_movieActors = m_movieActors;
     }
 
     public Movie() {

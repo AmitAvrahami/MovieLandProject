@@ -1,7 +1,7 @@
 package com.hit.service;
 
 import com.hit.algorithm.RabinCarpStringMatchingImpl;
-import com.hit.dm.MovieDataSample;
+import com.hit.dm.data.sample.MovieDataSample;
 import com.hit.dm.actor.Actor;
 import com.hit.dm.movie.Movie;
 import com.hit.dm.movie.MovieCategory;
@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieServiceTest extends TestCase {
+
+    //TODO : handle the algorithm
     MovieService movieService = new MovieService(new RabinCarpStringMatchingImpl(), "MovieLandProj/src/main/resources/moviedatasource.txt");
     private final List<Movie> sampleMovies = MovieDataSample.getSampleMovies();
 

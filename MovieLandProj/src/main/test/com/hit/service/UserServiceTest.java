@@ -1,9 +1,9 @@
 package com.hit.service;
 
-import com.hit.dm.MovieDataSample;
-import com.hit.dm.UserDataSample;
+import com.hit.dm.data.sample.UserDataSample;
 import com.hit.dm.movie.Movie;
 import com.hit.dm.movie.MovieCategory;
+import com.hit.dm.user.PermissionLevel;
 import com.hit.dm.user.User;
 import junit.framework.TestCase;
 
@@ -19,12 +19,17 @@ public class UserServiceTest extends TestCase {
     private static final String m_filePath = "MovieLandProj/src/main/resources/userdatasource.txt";
     private static UserService userService;
 
-    static {
-        try {
-            userService = new UserService(m_filePath);
-        } catch (IOException e) {
-            System.out.println("IO exception");
-        }
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        userService = new UserService(m_filePath);
+        removeSampleData();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        removeSampleData();
     }
 
     private List<User> sampleUsers = UserDataSample.getSampleUsers();
@@ -73,6 +78,7 @@ public class UserServiceTest extends TestCase {
     }
 
     public void testGetAllUsersFromDb() {
+        removeSampleData();
         testRegister();
         try {
             List<User> allUsers = userService.getAllUsersFromDb();
@@ -80,8 +86,6 @@ public class UserServiceTest extends TestCase {
             assertTrue(areUsersListsEqual(sampleUsers, allUsers));
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Exception occurred during test: " + e.getMessage(), e);
-        } finally {
-            removeSampleData();
         }
     }
 
@@ -96,8 +100,6 @@ public class UserServiceTest extends TestCase {
             }
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Exception occurred during test: " + e.getMessage(), e);
-        }finally {
-            removeSampleData();
         }
     }
 
@@ -106,16 +108,16 @@ public class UserServiceTest extends TestCase {
 
 
     public void testUpdateUser() {
+        removeSampleData();
         testRegister();
         User userToUpdate = sampleUsers.get(4);
         userToUpdate.setUserName("admin");
         try {
+            Thread.sleep(1000);
             userService.updateUser(userToUpdate);
-            assertEquals(userToUpdate,userService.getAllUsers().get(4));
+            assertEquals(userToUpdate, userService.getAllUsers().get(4));
         } catch (Exception e) {
             assertFalse(userService.getAllUsers().contains(userToUpdate));
-        }finally {
-            removeSampleData();
         }
 
     }
@@ -126,7 +128,7 @@ public class UserServiceTest extends TestCase {
         try {
             User user = sampleUsers.get(2);
             userService.addToWatchlist(user, newMovie);
-            HashMap<Movie,Boolean> updatedWatchlist = user.getUserMovieWatchList();
+            HashMap<Movie, Boolean> updatedWatchlist = user.getUserMovieWatchList();
             assertNotNull(updatedWatchlist);
             assertTrue(updatedWatchlist.containsKey(newMovie));
         } catch (Exception e) {
@@ -136,20 +138,90 @@ public class UserServiceTest extends TestCase {
     }
 
     public void testRemoveFromWatchlist() {
+        testRegister();
+        Movie newMovie = new Movie(1, "The Avengers", null, "Action-packed superhero movie", MovieCategory.ACTION, "2h 23m", null);
+        try {
+            User user = sampleUsers.get(0);
+            userService.removeFromWatchlist(user, newMovie);
+            HashMap<Movie, Boolean> updatedWatchlist = user.getUserMovieWatchList();
+            assertNotNull(updatedWatchlist);
+            assertFalse(updatedWatchlist.containsKey(newMovie));
+        } catch (Exception e) {
+            fail();
+            throw new RuntimeException(e);
+        }
     }
 
     public void testUpdateWatchlistStatus() {
+        testRegister();
+        Movie newMovie = new Movie(1, "The Avengers", null, "Action-packed superhero movie", MovieCategory.ACTION, "2h 23m", null);
+        try {
+            User user = sampleUsers.get(2);
+            userService.addToWatchlist(user, newMovie);
+            HashMap<Movie, Boolean> updatedWatchlist = user.getUserMovieWatchList();
+            assertNotNull(updatedWatchlist);
+            assertTrue(updatedWatchlist.containsKey(newMovie));
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     public void testDeleteUser() {
+        removeSampleData();
+        testRegister();
+        User userToDelete = sampleUsers.get(0);
+        try {
+            assertEquals(5,userService.getAllUsers().size());
+            userService.deleteUser(userToDelete);
+            assertEquals(4,userService.getAllUsers().size());
+            assertFalse(userService.getAllUsers().contains(userToDelete));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void testChangePassword() {
+        removeSampleData();
+        testRegister();
+        String newPassword = "abab3011";
+        User userChangePassword = sampleUsers.get(0);
+        try {
+            userService.changePassword(userChangePassword, newPassword);
+            assertEquals("Password should be updated", newPassword, userService.getAllUsers().get(0).getUserPassword());
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     public void testLogin() {
+        User sampleUser = new User(1, "sampleUser", "password", PermissionLevel.USER, new HashMap<>());
+        try {
+            userService.register(sampleUser);
+        } catch (Exception e) {
+            fail("Failed to register sample user: " + e.getMessage());
+        }finally {
+            removeSampleData();
+        }
+        assertTrue("Login should succeed with correct credentials", userService.login("sampleUser", "password"));
+        assertFalse("Login should fail with incorrect username", userService.login("incorrectUser", "password"));
+        assertFalse("Login should fail with incorrect password", userService.login("sampleUser", "incorrectPassword"));
     }
 
     public void testIsAdmin() {
+        User adminUser = new User(1, "adminUser", "password", PermissionLevel.ADMIN, new HashMap<>());
+        try {
+            userService.register(adminUser);
+        } catch (Exception e) {
+            fail("Failed to register admin user: " + e.getMessage());
+        }
+        assertTrue("User should be identified as an admin", userService.isAdmin(adminUser));
+        User userUser = new User(2, "userUser", "password", PermissionLevel.USER, new HashMap<>());
+        try {
+            userService.register(userUser);
+        } catch (Exception e) {
+            fail("Failed to register user user: " + e.getMessage());
+        }
+        assertFalse("User should not be identified as an admin", userService.isAdmin(userUser));
     }
 }

@@ -108,13 +108,17 @@ public class UserService implements IUserService {
 
     @Override
     public void deleteUser(User user) throws Exception {
-        dao.deleteElement(user);
-
+        if (m_allUsers.contains(user)) {
+            dao.deleteElement(user);
+            m_allUsers.remove(user);
+        } else {
+            throw new NoSuchElementException("User does not exist");
+        }
     }
 
     @Override
     public boolean changePassword(User user, String newPassword) throws Exception {
-        if (user.getUserPassword()!=newPassword && !newPassword.isEmpty() && newPassword.length() > 3){
+        if (!Objects.equals(user.getUserPassword(), newPassword) && newPassword.length() > 3){
             user.setUserPassword(newPassword);
             updateUser(user);
             return true;

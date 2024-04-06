@@ -1,4 +1,4 @@
-package com.hit.dm;
+package com.hit.dm.data.sample;
 
 import com.hit.dm.actor.Actor;
 import com.hit.dm.movie.Movie;
