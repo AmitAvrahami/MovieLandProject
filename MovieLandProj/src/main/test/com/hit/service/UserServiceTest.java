@@ -16,13 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class UserServiceTest extends TestCase {
-    private static final String m_filePath = "MovieLandProj/src/main/resources/userdatasource.txt";
     private static UserService userService;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        userService = new UserService(m_filePath);
+        userService = new UserService();
         removeSampleData();
     }
 

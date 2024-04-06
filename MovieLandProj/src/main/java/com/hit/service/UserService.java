@@ -9,33 +9,12 @@ import com.hit.dm.user.User;
 import java.io.IOException;
 import java.util.*;
 
-interface IUserService  {
-    List<User>  getAllUsersFromDb() throws IOException, ClassNotFoundException;
-    User getUserById(int userId) throws IOException, ClassNotFoundException;
-    void logout(User user);
-    void register(User user) throws Exception;
-    void updateUser(User user) throws Exception;
-    void addToWatchlist(User user, Movie movie) throws Exception;
-    void removeFromWatchlist(User user, Movie movie) throws Exception;
-    void updateWatchlistStatus(User user, Movie movie) throws Exception;
-    void deleteUser(User user) throws Exception;
-    boolean changePassword(User user, String newPassword) throws Exception;
-    boolean login(String username, String password);
-    boolean isAdmin(User user);
-
-}
-
 public class UserService implements IUserService {
     private UserFileImpl dao;
-    private String m_filePath;
-
-
-
     private List<User> m_allUsers;
 
-    public UserService(String filePath) throws IOException {
-        this.m_filePath = filePath;
-        this.dao = new UserFileImpl(filePath);
+    public UserService() throws IOException {
+        this.dao = new UserFileImpl();
         try {
             this.m_allUsers = getAllUsersFromDb();
         } catch (ClassNotFoundException e) {

@@ -9,10 +9,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class UserFileImpl implements IDao<Integer, User> {
-    private String m_filePath;
+    private final static String m_filePath = "MovieLandProj/src/main/resources/userdatasource.txt";
 
-    public UserFileImpl(String filePath) throws IOException {
-        this.m_filePath = filePath;
+    public UserFileImpl() throws IOException {
         boolean isEmptyFile = isEmptyDb();
         if (isEmptyFile) {
             try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(m_filePath))) {

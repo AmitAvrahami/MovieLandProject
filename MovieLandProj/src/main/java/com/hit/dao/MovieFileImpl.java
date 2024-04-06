@@ -11,11 +11,10 @@ public class MovieFileImpl implements IDao<Integer, Movie> {
 
     //TODO dont forget to close file
 
-    private String m_file_path;
+    private final static String m_file_path = "MovieLandProj/src/main/resources/moviedatasource.txt" ;
 
 
-    public MovieFileImpl(String file_path) {
-        this.m_file_path = file_path;
+    public MovieFileImpl() {
         if (isEmptyDb()) {
             try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(m_file_path))) {
                 objectOutputStream.writeObject(new ArrayList<Movie>());

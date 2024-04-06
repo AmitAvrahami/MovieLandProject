@@ -10,40 +10,15 @@ import com.hit.dm.movie.MovieRateRange;
 import java.io.IOException;
 import java.util.*;
 
-interface IMovieService {
-    List<Movie> searchMoviesByGenre(MovieCategory movieCategory);
-
-    List<Movie> searchMoviesByMovieName(String keyword);
-
-    List<Actor> getActorsByMovie(Movie movie);
-
-    List<Movie> getMoviesByActorFullName(String name, String lastName)throws Exception;
-
-    Movie randomSelectionOfMovieByCategory(MovieCategory movieCategory);
-
-    List<Movie> getAllMoviesFromDb() throws IOException, ClassNotFoundException;
-
-    void rateAMovie(Integer movieId, MovieRateRange movieRateRange) throws IOException, ClassNotFoundException;
-
-    void removeMovie(Movie movieToRemove) throws Exception;
-
-    void addMovie(Movie movieToAdd) throws Exception;
-
-    void updateMovie(Movie movie) throws Exception,IOException;
-
-}
-
 public class MovieService implements IMovieService {
 
     private MovieFileImpl dao;
-    private String m_filePath;
     private IAlgoStringMatching m_stringMatchingAlgorithm;
     private List<Movie> m_allMovies;
 
-    public MovieService(IAlgoStringMatching m_stringMatchingAlgorithm, String filePath) {
+    public MovieService(IAlgoStringMatching m_stringMatchingAlgorithm,MovieFileImpl movieDao) {
         this.m_stringMatchingAlgorithm = m_stringMatchingAlgorithm;
-        this.m_filePath = filePath;
-        this.dao = new MovieFileImpl(filePath);
+        this.dao = new MovieFileImpl();
         try{
             this.m_allMovies = dao.getAll();
 
