@@ -193,14 +193,13 @@ public class MovieServiceTest extends TestCase {
     public void testGetMoviesByActorFullName() {
         testAddMovie();
         String john = "John";
-        String Doe = "Doe";
         try {
-            List<Movie> moviesByActor = movieService.getMoviesByActorFullName(john,Doe);
+            List<Movie> moviesByActor = movieService.getMoviesByActorFullName(john);
             assertEquals("Number of movies returned should match", 1, moviesByActor.size());
             assertEquals("The Avengers",moviesByActor.get(0).getMovieName());
         } catch (Exception e) {
             movieService.getAllMovies().forEach(movie -> {
-                assertFalse(movie.getMovieActors().contains(john+Doe));
+                assertFalse(movie.getMovieActors().contains(john));
             });
         }finally {
             removeSampleData();

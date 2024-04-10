@@ -38,10 +38,7 @@ public class UserService implements IUserService {
         return dao.getElementById(userId);
     }
 
-    @Override
-    public void logout(User user) {
 
-    }
 
     @Override
     public void register(User user) throws Exception {
@@ -95,23 +92,15 @@ public class UserService implements IUserService {
         }
     }
 
-    @Override
-    public boolean changePassword(User user, String newPassword) throws Exception {
-        if (!Objects.equals(user.getUserPassword(), newPassword) && newPassword.length() > 3){
-            user.setUserPassword(newPassword);
-            updateUser(user);
-            return true;
-        }
-        return false;
-    }
+
 
     @Override
-    public boolean login(String username, String password) {
+    public User login(String username, String password) {
         for (User user : m_allUsers){
-            if (user.getUserName() == username && user.getUserPassword() == password)
-                return true;
+            if (user.getUserName().equals(username) && user.getUserPassword().equals(password))
+                return user;
         }
-        return false;
+        return null;
     }
 
     @Override

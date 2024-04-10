@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class UserServiceTest extends TestCase {
     private static UserService userService;
@@ -102,9 +103,6 @@ public class UserServiceTest extends TestCase {
         }
     }
 
-//    public void testLogout() {
-//    }
-
 
     public void testUpdateUser() {
         removeSampleData();
@@ -180,18 +178,7 @@ public class UserServiceTest extends TestCase {
 
     }
 
-    public void testChangePassword() {
-        removeSampleData();
-        testRegister();
-        String newPassword = "abab3011";
-        User userChangePassword = sampleUsers.get(0);
-        try {
-            userService.changePassword(userChangePassword, newPassword);
-            assertEquals("Password should be updated", newPassword, userService.getAllUsers().get(0).getUserPassword());
-        } catch (Exception e) {
-            fail();
-        }
-    }
+
 
     public void testLogin() {
         User sampleUser = new User(1, "sampleUser", "password", PermissionLevel.USER, new HashMap<>());
@@ -202,9 +189,9 @@ public class UserServiceTest extends TestCase {
         }finally {
             removeSampleData();
         }
-        assertTrue("Login should succeed with correct credentials", userService.login("sampleUser", "password"));
-        assertFalse("Login should fail with incorrect username", userService.login("incorrectUser", "password"));
-        assertFalse("Login should fail with incorrect password", userService.login("sampleUser", "incorrectPassword"));
+        assertTrue("Login should succeed with correct credentials", Objects.nonNull(userService.login("sampleUser", "password")));
+        assertFalse("Login should fail with incorrect username", Objects.nonNull(userService.login("incorrectUser", "password")));
+        assertFalse("Login should fail with incorrect password", Objects.nonNull(userService.login("sampleUser", "incorrectPassword")));
     }
 
     public void testIsAdmin() {

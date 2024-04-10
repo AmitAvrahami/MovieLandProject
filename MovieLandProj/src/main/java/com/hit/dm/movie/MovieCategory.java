@@ -1,6 +1,7 @@
 package com.hit.dm.movie;
 
 public enum MovieCategory {
+    NONE,
     ACTION,
     COMEDY,
     DRAMA,

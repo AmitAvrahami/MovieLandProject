@@ -1,5 +1,7 @@
 package com.hit.dm.user;
 
-public enum PermissionLevel {
+import java.io.Serializable;
+
+public enum PermissionLevel implements Serializable {
     ADMIN,USER
 }

@@ -62,17 +62,17 @@ public class MovieService implements IMovieService {
         return allMoviesByCategory;
     }
 
-
     @Override
     public List<Movie> searchMoviesByMovieName(String keyword) {
         List<Movie> allMovieByMovieName = new ArrayList<>();
         for (Movie movie : m_allMovies) {
-            if (movie.getMovieName().contains(keyword)) {
+            if (!m_stringMatchingAlgorithm.search(movie.getMovieName(),keyword).isEmpty()) {
                 allMovieByMovieName.add(movie);
             }
         }
         return allMovieByMovieName;
     }
+
 
 
     @Override
@@ -190,24 +190,21 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public List<Movie> getMoviesByActorFullName(String name, String lastName) throws Exception {
+    public List<Movie> getMoviesByActorFullName(String name) {
         List<Movie> moviesByActorName = new ArrayList<>();
         try {
             for (Movie movie : m_allMovies) {
                 for (Actor actor : movie.getMovieActors()) {
-                    if (actor.getActorName() == name && actor.getActorLastName() == lastName) {
+                    if (!m_stringMatchingAlgorithm.search(actor.getActorName() + actor.getActorLastName(), name).isEmpty()) {
                         moviesByActorName.add(movie);
                         break;
                     }
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new NoSuchElementException();
         }
-
-        if (moviesByActorName.isEmpty())
-            return null;
-        else return moviesByActorName;
+        return moviesByActorName;
     }
 
 

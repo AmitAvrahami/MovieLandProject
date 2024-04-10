@@ -8,7 +8,6 @@ public class Server implements Runnable {
 
     private final int m_port;
 
-
     public Server(int port) {
         this.m_port = port;
     }
@@ -20,7 +19,6 @@ public class Server implements Runnable {
                 Socket clientSocket = m_server.accept();
                 ClientRequest clientRequest = new ClientRequest(clientSocket);
                 clientRequest.process();
-                System.out.println("ok");
             }
 
         } catch (IOException e) {

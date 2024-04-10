@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Movie implements Serializable, Comparable<Movie> {
+    private static final long serialVersionUID =1883642389429622930L;
     private static Integer countOfRating = 0;
     private Integer m_movieId;
     private String m_movieName;
@@ -16,6 +17,16 @@ public class Movie implements Serializable, Comparable<Movie> {
     private String m_movieSynopsis;
     private MovieCategory m_movieCategory;
     private String m_movieTime;
+
+    public String getMovieImage() {
+        return m_movieImage;
+    }
+
+    public void setMovieImage(String movieImage) {
+        this.m_movieImage = m_movieImage;
+    }
+
+    private String m_movieImage;
     private List<Actor> m_movieActors = new ArrayList<>();
 
     public Movie(Integer m_movieId, String m_movieName, List<MovieRateRange> m_movieRate, String m_movieSynopsis, MovieCategory m_movieCategory, String m_movieTime, List<Actor> m_movieActors) {
@@ -35,6 +46,7 @@ public class Movie implements Serializable, Comparable<Movie> {
         this.m_movieSynopsis = "";
         this.m_movieCategory = MovieCategory.ACTION;
         this.m_movieTime = "";
+        this.m_movieImage = "";
         this.m_movieActors.add(new Actor());
     }
 

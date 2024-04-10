@@ -26,10 +26,7 @@ public class UserController implements IUserService {
         return m_userService.getUserById(userId);
     }
 
-    @Override
-    public void logout(User user) {
-        m_userService.logout(user);
-    }
+
 
     @Override
     public void register(User user) throws Exception {
@@ -62,12 +59,7 @@ public class UserController implements IUserService {
     }
 
     @Override
-    public boolean changePassword(User user, String newPassword) throws Exception {
-        return m_userService.changePassword(user, newPassword);
-    }
-
-    @Override
-    public boolean login(String username, String password) {
+    public User login(String username, String password) {
         return m_userService.login(username, password);
     }
 

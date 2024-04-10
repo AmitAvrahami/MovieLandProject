@@ -12,6 +12,14 @@ public class Request {
         this.m_body = body;
     }
 
+    public Request(Map<String, Object> m_body) {
+        this.m_body = m_body;
+    }
+
+    public Request(String m_action) {
+        this.m_action = m_action;
+    }
+
     public String getAction() {
         return m_action;
     }

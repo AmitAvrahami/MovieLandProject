@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class User implements Serializable {
+    private static final long serialVersionUID =  -2065987734618278341L;
 
     private Integer m_userId;
     private String m_userName;
@@ -16,8 +17,10 @@ public class User implements Serializable {
     private PermissionLevel m_permissionLevel;
     private HashMap<Movie, Boolean> m_userMovieWatchList;
 
+    public User() {
+    }
 
-    public User(Integer userId, String m_userName, String userPassword, PermissionLevel permissionLevel,  HashMap<Movie, Boolean> userMovieWatchList) {
+    public User(Integer userId, String m_userName, String userPassword, PermissionLevel permissionLevel, HashMap<Movie, Boolean> userMovieWatchList) {
         this.m_userId = userId;
         this.m_userName = m_userName;
         this.m_userPassword = userPassword;

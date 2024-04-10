@@ -8,14 +8,13 @@ import com.hit.dm.movie.MovieRateRange;
 import java.io.IOException;
 import java.util.List;
 
-public interface IMovieService {
+public interface IMovieService  {
     List<Movie> searchMoviesByGenre(MovieCategory movieCategory);
 
     List<Movie> searchMoviesByMovieName(String keyword);
 
     List<Actor> getActorsByMovie(Movie movie);
 
-    List<Movie> getMoviesByActorFullName(String name, String lastName)throws Exception;
 
     Movie randomSelectionOfMovieByCategory(MovieCategory movieCategory);
 
@@ -29,4 +28,6 @@ public interface IMovieService {
 
     void updateMovie(Movie movie) throws Exception,IOException;
 
+
+    List<Movie> getMoviesByActorFullName(String name);
 }
