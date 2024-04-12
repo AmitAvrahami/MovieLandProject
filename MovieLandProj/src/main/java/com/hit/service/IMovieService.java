@@ -20,7 +20,6 @@ public interface IMovieService  {
 
     List<Movie> getAllMoviesFromDb() throws IOException, ClassNotFoundException;
 
-    void rateAMovie(Integer movieId, MovieRateRange movieRateRange) throws IOException, ClassNotFoundException;
 
     void removeMovie(Movie movieToRemove) throws Exception;
 

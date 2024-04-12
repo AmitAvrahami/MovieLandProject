@@ -10,18 +10,29 @@ import java.util.Objects;
 
 public class User implements Serializable {
     private static final long serialVersionUID =  -2065987734618278341L;
-
+    private static Integer  lastAssignedId = 0;
     private Integer m_userId;
     private String m_userName;
     private String m_userPassword;
     private PermissionLevel m_permissionLevel;
-    private HashMap<Movie, Boolean> m_userMovieWatchList;
+    private List<Movie> m_userMovieWatchList;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "m_userId=" + m_userId +
+                ", m_userName='" + m_userName + '\'' +
+                ", m_userPassword='" + m_userPassword + '\'' +
+                ", m_permissionLevel=" + m_permissionLevel +
+                ", m_userMovieWatchList=" + m_userMovieWatchList +
+                '}';
+    }
 
     public User() {
     }
 
-    public User(Integer userId, String m_userName, String userPassword, PermissionLevel permissionLevel, HashMap<Movie, Boolean> userMovieWatchList) {
-        this.m_userId = userId;
+    public User(Integer userId, String m_userName, String userPassword, PermissionLevel permissionLevel, List<Movie> userMovieWatchList) {
+        this.m_userId = ++userId;
         this.m_userName = m_userName;
         this.m_userPassword = userPassword;
         this.m_permissionLevel = permissionLevel;
@@ -60,11 +71,11 @@ public class User implements Serializable {
         this.m_permissionLevel = m_permissionLevel;
     }
 
-    public  HashMap<Movie, Boolean> getUserMovieWatchList() {
+    public  List<Movie> getUserMovieWatchList() {
         return m_userMovieWatchList;
     }
 
-    public void setUserMovieWatchList(HashMap<Movie, Boolean> m_userMovieWatchList) {
+    public void setUserMovieWatchList(List<Movie> m_userMovieWatchList) {
         this.m_userMovieWatchList = m_userMovieWatchList;
     }
 

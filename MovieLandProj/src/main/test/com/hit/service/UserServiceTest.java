@@ -121,13 +121,13 @@ public class UserServiceTest extends TestCase {
 
     public void testAddToWatchlist() {
         testRegister();
-        Movie newMovie = new Movie(1, "The Avengers", null, "Action-packed superhero movie", MovieCategory.ACTION, "2h 23m", null);
+        Movie newMovie = new Movie(1, "The Avengers",  "Action-packed superhero movie", MovieCategory.ACTION, "2h 23m", null);
         try {
             User user = sampleUsers.get(2);
             userService.addToWatchlist(user, newMovie);
-            HashMap<Movie, Boolean> updatedWatchlist = user.getUserMovieWatchList();
+            List<Movie> updatedWatchlist = user.getUserMovieWatchList();
             assertNotNull(updatedWatchlist);
-            assertTrue(updatedWatchlist.containsKey(newMovie));
+            assertTrue(updatedWatchlist.contains(newMovie));
         } catch (Exception e) {
             fail();
             throw new RuntimeException(e);
@@ -136,13 +136,13 @@ public class UserServiceTest extends TestCase {
 
     public void testRemoveFromWatchlist() {
         testRegister();
-        Movie newMovie = new Movie(1, "The Avengers", null, "Action-packed superhero movie", MovieCategory.ACTION, "2h 23m", null);
+        Movie newMovie = new Movie(1, "The Avengers",  "Action-packed superhero movie", MovieCategory.ACTION, "2h 23m", null);
         try {
             User user = sampleUsers.get(0);
             userService.removeFromWatchlist(user, newMovie);
-            HashMap<Movie, Boolean> updatedWatchlist = user.getUserMovieWatchList();
+            List<Movie> updatedWatchlist = user.getUserMovieWatchList();
             assertNotNull(updatedWatchlist);
-            assertFalse(updatedWatchlist.containsKey(newMovie));
+            assertFalse(updatedWatchlist.contains(newMovie));
         } catch (Exception e) {
             fail();
             throw new RuntimeException(e);
@@ -151,13 +151,13 @@ public class UserServiceTest extends TestCase {
 
     public void testUpdateWatchlistStatus() {
         testRegister();
-        Movie newMovie = new Movie(1, "The Avengers", null, "Action-packed superhero movie", MovieCategory.ACTION, "2h 23m", null);
+        Movie newMovie = new Movie(1, "The Avengers",  "Action-packed superhero movie", MovieCategory.ACTION, "2h 23m", null);
         try {
             User user = sampleUsers.get(2);
             userService.addToWatchlist(user, newMovie);
-            HashMap<Movie, Boolean> updatedWatchlist = user.getUserMovieWatchList();
+            List<Movie> updatedWatchlist = user.getUserMovieWatchList();
             assertNotNull(updatedWatchlist);
-            assertTrue(updatedWatchlist.containsKey(newMovie));
+            assertTrue(updatedWatchlist.contains(newMovie));
         } catch (Exception e) {
             fail();
         }
@@ -181,7 +181,7 @@ public class UserServiceTest extends TestCase {
 
 
     public void testLogin() {
-        User sampleUser = new User(1, "sampleUser", "password", PermissionLevel.USER, new HashMap<>());
+        User sampleUser = new User(1, "sampleUser", "password", PermissionLevel.USER, new ArrayList<>());
         try {
             userService.register(sampleUser);
         } catch (Exception e) {
@@ -195,14 +195,14 @@ public class UserServiceTest extends TestCase {
     }
 
     public void testIsAdmin() {
-        User adminUser = new User(1, "adminUser", "password", PermissionLevel.ADMIN, new HashMap<>());
+        User adminUser = new User(1, "adminUser", "password", PermissionLevel.ADMIN, new ArrayList<>());
         try {
             userService.register(adminUser);
         } catch (Exception e) {
             fail("Failed to register admin user: " + e.getMessage());
         }
         assertTrue("User should be identified as an admin", userService.isAdmin(adminUser));
-        User userUser = new User(2, "userUser", "password", PermissionLevel.USER, new HashMap<>());
+        User userUser = new User(2, "userUser", "password", PermissionLevel.USER,new ArrayList<>());
         try {
             userService.register(userUser);
         } catch (Exception e) {

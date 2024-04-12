@@ -123,24 +123,7 @@ public class MovieServiceTest extends TestCase {
         removeSampleData();
     }
 
-    public void testRateAMovie() {
-        testAddMovie();
-        try{
-            movieService.rateAMovie(1, MovieRateRange.THREE);
-            sampleMovies.get(0).getMovieRate().add(MovieRateRange.THREE);
 
-            Movie dataMovie = movieService.getAllMovies().get(0);
-            Movie sampleMovie  = sampleMovies.get(0);
-            assertEquals(sampleMovie.getMovieRate().get(0),dataMovie.getMovieRate().get(0));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }finally {
-            removeSampleData();
-        }
-    }
 
     public void testRemoveMovie() {
         testAddMovie();

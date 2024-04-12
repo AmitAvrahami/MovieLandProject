@@ -13,7 +13,6 @@ public interface IUserService  {
     void updateUser(User user) throws Exception;
     void addToWatchlist(User user, Movie movie) throws Exception;
     void removeFromWatchlist(User user, Movie movie) throws Exception;
-    void updateWatchlistStatus(User user, Movie movie) throws Exception;
     void deleteUser(User user) throws Exception;
     User login(String username, String password);
     boolean isAdmin(User user);

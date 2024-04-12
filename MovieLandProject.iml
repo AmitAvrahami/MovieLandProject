@@ -15,16 +15,16 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../StringMatchingAlgorithm/out/artifacts/AlgorithmModule_jar/AlgorithmModule.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../gson-2.10.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/Movie Land Project/gson-2.10.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../StringMatchingAlgorithm/out/artifacts/AlgorithmModule_jar/AlgorithmModule.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

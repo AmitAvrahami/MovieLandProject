@@ -47,9 +47,7 @@ public class MovieController<T> implements IMovieService {
         return movieService.getAllMoviesFromDb();
     }
 
-    public void rateAMovie(Integer movieId, MovieRateRange movieRateRange) throws IOException, ClassNotFoundException {
-        movieService.rateAMovie(movieId, movieRateRange);
-    }
+
 
     public void removeMovie(Movie movieToRemove) throws Exception {
         movieService.removeMovie(movieToRemove);

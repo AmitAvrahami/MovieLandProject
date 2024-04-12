@@ -17,7 +17,7 @@ public class Server implements Runnable {
             ServerSocket m_server = new ServerSocket(m_port);
             while (true) {
                 Socket clientSocket = m_server.accept();
-                ClientRequest clientRequest = new ClientRequest(clientSocket);
+                HandleRequest clientRequest = new HandleRequest(clientSocket);
                 clientRequest.process();
             }
 

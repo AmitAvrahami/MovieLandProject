@@ -42,8 +42,18 @@ public class UserService implements IUserService {
 
     @Override
     public void register(User user) throws Exception {
-        dao.addElement(user);
-        m_allUsers.add(user);
+        List<User> allUsers = getAllUsers();
+        for (User other : allUsers) {
+            if (user.getUserName().equals(other.getUserName())) {
+                throw new IllegalArgumentException("Username already exists: " + user.getUserName());
+            }
+        }
+        if (allUsers.contains(user)) {
+            throw new IllegalArgumentException("User already exists: " + user);
+        } else {
+            dao.addElement(user);
+            m_allUsers.add(user);
+        }
     }
 
     @Override
@@ -53,15 +63,19 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void addToWatchlist(User user, Movie movie) throws Exception {
-        user.getUserMovieWatchList().put(movie,false);
-        updateUser(user);
+    public void addToWatchlist(User user, Movie movie) throws NoSuchElementException,Exception {
+        List<Movie> watchlist = user.getUserMovieWatchList();
+        if (!watchlist.contains(movie)) {
+            user.getUserMovieWatchList().add(movie);
+            updateUser(user);
+        }
+        else throw new NoSuchElementException();
     }
 
     @Override
     public void removeFromWatchlist(User user, Movie movie) throws Exception {
-        HashMap<Movie, Boolean> watchlist = user.getUserMovieWatchList();
-        if (watchlist.containsKey(movie)) {
+        List<Movie> watchlist= user.getUserMovieWatchList();
+        if (watchlist.contains(movie)) {
             watchlist.remove(movie);
             updateUser(user);
         } else {
@@ -69,18 +83,7 @@ public class UserService implements IUserService {
         }
     }
 
-    @Override
-    public void updateWatchlistStatus(User user, Movie movie) throws Exception {
-        HashMap<Movie, Boolean> watchlist = user.getUserMovieWatchList();
-        if (watchlist.containsKey(movie)){
-            Boolean status =  watchlist.get(movie);
-            watchlist.put(movie,!status);
-            updateUser(user);
-        }
-        else{
-            throw new NoSuchElementException();
-        }
-    }
+
 
     @Override
     public void deleteUser(User user) throws Exception {

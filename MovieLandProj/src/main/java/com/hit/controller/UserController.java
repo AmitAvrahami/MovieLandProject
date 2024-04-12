@@ -6,6 +6,7 @@ import com.hit.service.IUserService;
 import com.hit.service.UserService;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 public class UserController implements IUserService {
@@ -48,10 +49,6 @@ public class UserController implements IUserService {
         m_userService.removeFromWatchlist(user, movie);
     }
 
-    @Override
-    public void updateWatchlistStatus(User user, Movie movie) throws Exception {
-        m_userService.updateWatchlistStatus(user, movie);
-    }
 
     @Override
     public void deleteUser(User user) throws Exception {
@@ -66,6 +63,16 @@ public class UserController implements IUserService {
     @Override
     public boolean isAdmin(User user) {
         return m_userService.isAdmin(user);
+    }
+
+    public Integer getLastUserId() throws IOException, ClassNotFoundException {
+        List<User> allUsers = getAllUsersFromDb();
+        if (!allUsers.isEmpty()) {
+            allUsers.sort(Comparator.comparingInt(User::getUserId).reversed());
+            return allUsers.get(0).getUserId();
+        } else {
+            return 0;
+        }
     }
 
     //TODO : make some methods as the service

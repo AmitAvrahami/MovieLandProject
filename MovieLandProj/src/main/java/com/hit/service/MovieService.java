@@ -94,35 +94,7 @@ public class MovieService implements IMovieService {
         return ratings;
     }
 
-    private Integer calculateAverageOfRate(Movie movie) {
-        List<Integer> ratings = convertMovieRateToInteger(movie.getMovieRate());
-        if (ratings.isEmpty()) {
-            return 1;
-        }
-        int totalRating = 0;
-        for (Integer rating : ratings) {
-            totalRating += rating;
-        }
-        Integer average = totalRating / ratings.size();
-        if (average == 0) return 1;
-        else return average;
-    }
 
-    @Override
-    public void rateAMovie(Integer movieId, MovieRateRange movieRateRange) throws IOException, ClassNotFoundException {
-        Movie movieToRate = dao.getElementById(movieId);
-        if (movieToRate != null) {
-            movieToRate.getMovieRate().add(movieRateRange);
-            try {
-                updateMovie(movieToRate);
-
-            } catch (Exception e) {
-                System.out.println("doesnt update");
-            }
-        } else {
-            System.out.println("movie with id" + movieId + "not found");
-        }
-    }
     @Override
     public void removeMovie(Movie movieToRemove) throws Exception {
         if (!m_allMovies.contains(movieToRemove)) {
