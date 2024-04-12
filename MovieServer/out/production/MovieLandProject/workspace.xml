@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e389ee2f-5f6b-4b00-9901-1c7189c1a358" name="Changes" comment="final push" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="JUnit3 Test Class" />
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;BoodaGuy&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="31bc038f-f953-4647-aa3a-da17fb7379e2" />
+        <option name="url" value="https://github.com/BoodaGuy/MovieLandProject.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2eXurbaswJtp3L0CXjBjiifiahl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.ServerDriver.executor": "Run",
+    "JUnit.MovieServiceTest.executor": "Run",
+    "JUnit.MovieServiceTest.testAddMovie.executor": "Run",
+    "JUnit.MovieServiceTest.testGetActorsByMovie.executor": "Run",
+    "JUnit.MovieServiceTest.testGetAllMovies.executor": "Run",
+    "JUnit.MovieServiceTest.testGetAllMoviesFromDb.executor": "Run",
+    "JUnit.MovieServiceTest.testGetMoviesByActorFullName.executor": "Run",
+    "JUnit.MovieServiceTest.testRandomSelectionOfMovieByCategory.executor": "Run",
+    "JUnit.MovieServiceTest.testRateAMovie.executor": "Run",
+    "JUnit.MovieServiceTest.testRemoveMovie.executor": "Debug",
+    "JUnit.MovieServiceTest.testSearchMoviesByGenre.executor": "Debug",
+    "JUnit.MovieServiceTest.testSearchMoviesByMovieName.executor": "Debug",
+    "JUnit.MovieServiceTest.testUpdateMovie.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
+    "JUnit.UserServiceTest.testAddToWatchlist.executor": "Run",
+    "JUnit.UserServiceTest.testChangePassword.executor": "Run",
+    "JUnit.UserServiceTest.testDeleteUser.executor": "Debug",
+    "JUnit.UserServiceTest.testGetAllUsersFromDb.executor": "Run",
+    "JUnit.UserServiceTest.testGetUserById.executor": "Run",
+    "JUnit.UserServiceTest.testIsAdmin.executor": "Run",
+    "JUnit.UserServiceTest.testLogin.executor": "Run",
+    "JUnit.UserServiceTest.testRegister.executor": "Debug",
+    "JUnit.UserServiceTest.testRemoveFromWatchlist.executor": "Debug",
+    "JUnit.UserServiceTest.testUpdateUser.executor": "Run",
+    "JUnit.UserServiceTest.testUpdateWatchlistStatus.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/amitx/IdeaProjects/MovieLandProject/MovieLandProj/src/com/hit/dm/movie",
+    "last_opened_file_path": "C:/Users/amitx/Desktop/Movie Land Project/MovieLandProject/MovieClient",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/amitx/IdeaProjects/MovieLandProject/src/Main.java",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15332031",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.hit.server" />
+      <recent name="com.hit.dm.user" />
+      <recent name="com.hit.service" />
+      <recent name="com.hit.dm" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\amitx\Desktop\Movie Land Project\MovieLandProject\MovieServer\lib" />
+      <recent name="C:\Users\amitx\IdeaProjects\MovieLandProject\MovieLandProj\src\main\resources\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\amitx\Desktop\Movie Land Project\MovieLandProject\MovieServer\lib" />
+      <recent name="C:\Users\amitx\IdeaProjects\MovieLandProject\MovieLandProj\src\main\resources" />
+      <recent name="C:\Users\amitx\IdeaProjects\MovieLandProject\MovieLandProj\src\main\java\com\hit\service" />
+      <recent name="C:\Users\amitx\IdeaProjects\MovieLandProject\MovieLandProj\src\main\java" />
+      <recent name="C:\Users\amitx\IdeaProjects\MovieLandProject\MovieLandProj\src\main" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="junit.framework.TestCase" />
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.hit.service" />
+      <recent name="com.hit.dm.movie" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.hit.dm.movie" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ServerDriver">
+    <configuration name="ServerDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.hit.server.ServerDriver" />
+      <module name="MovieLandProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hit.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MovieServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MovieLandProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hit.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hit.service" />
+      <option name="MAIN_CLASS_NAME" value="com.hit.service.MovieServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MovieLandProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hit.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hit.service" />
+      <option name="MAIN_CLASS_NAME" value="com.hit.service.UserServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.testRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MovieLandProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hit.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hit.service" />
+      <option name="MAIN_CLASS_NAME" value="com.hit.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="testRegister" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.testUpdateUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MovieLandProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hit.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hit.service" />
+      <option name="MAIN_CLASS_NAME" value="com.hit.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="testUpdateUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ServerDriver" />
+        <item itemvalue="JUnit.UserServiceTest" />
+        <item itemvalue="JUnit.UserServiceTest.testRegister" />
+        <item itemvalue="JUnit.MovieServiceTest" />
+        <item itemvalue="JUnit.UserServiceTest.testUpdateUser" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-868cef46" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e389ee2f-5f6b-4b00-9901-1c7189c1a358" name="Changes" comment="" />
+      <created>1712063447043</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712063447043</updated>
+      <workItem from="1712063448326" duration="23392000" />
+      <workItem from="1712142110984" duration="29643000" />
+      <workItem from="1712184009544" duration="5695000" />
+      <workItem from="1712189754087" duration="669000" />
+      <workItem from="1712226759354" duration="101460000" />
+      <workItem from="1712656256721" duration="3298000" />
+      <workItem from="1712669953550" duration="380000" />
+      <workItem from="1712674931168" duration="37638000" />
+      <workItem from="1712819472074" duration="35523000" />
+      <workItem from="1712921059767" duration="1721000" />
+      <workItem from="1712923880389" duration="58000" />
+      <workItem from="1712924223996" duration="39000" />
+      <workItem from="1712927496225" duration="5960000" />
+      <workItem from="1712936772221" duration="800000" />
+      <workItem from="1712941943563" duration="338000" />
+      <workItem from="1712942305908" duration="487000" />
+      <workItem from="1712944156758" duration="58000" />
+      <workItem from="1712944228622" duration="142000" />
+      <workItem from="1712944683657" duration="46000" />
+      <workItem from="1712950907969" duration="1033000" />
+    </task>
+    <task id="LOCAL‎-00001" summary="vs">
+      <option name="closed" value="true" />
+      <created>1712097679795</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL‎-00001" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1712097679795</updated>
+    </task>
+    <task id="LOCAL‎-00002" summary="complete services and movieDao interfaces">
+      <option name="closed" value="true" />
+      <created>1712098078335</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1712098078335</updated>
+    </task>
+    <task id="LOCAL‎-00003" summary="check service functions process">
+      <option name="closed" value="true" />
+      <created>1712175824077</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL‎-00003" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1712175824077</updated>
+    </task>
+    <task id="LOCAL‎-00004" summary="check service functions process">
+      <option name="closed" value="true" />
+      <created>1712246759642</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL‎-00004" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1712246759643</updated>
+    </task>
+    <task id="LOCAL‎-00005" summary="check user service functions process">
+      <option name="closed" value="true" />
+      <created>1712316252577</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL‎-00005" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1712316252578</updated>
+    </task>
+    <task id="LOCAL‎-00006" summary="server almost Complete">
+      <option name="closed" value="true" />
+      <created>1712402938941</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1712402938942</updated>
+    </task>
+    <task id="LOCAL‎-00007" summary="there is connections">
+      <option name="closed" value="true" />
+      <created>1712439581429</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL‎-00007" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1712439581429</updated>
+    </task>
+    <task id="LOCAL‎-00008" summary="work">
+      <option name="closed" value="true" />
+      <created>1712932850285</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1712932850285</updated>
+    </task>
+    <task id="LOCAL‎-00009" summary="final push">
+      <option name="closed" value="true" />
+      <created>1712944352495</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1712944352495</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="complete interfaces for service,movieDao" />
+    <MESSAGE value="vs" />
+    <MESSAGE value="complete services and movieDao interfaces" />
+    <MESSAGE value="check service functions process" />
+    <MESSAGE value="check user service functions process" />
+    <MESSAGE value="server almost Complete" />
+    <MESSAGE value="there is connections" />
+    <MESSAGE value="work" />
+    <MESSAGE value="final push" />
+    <option name="LAST_COMMIT_MESSAGE" value="final push" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MovieLandProj/src/main/java/com/hit/server/HandleRequest.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="1013" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MovieLandProj/src/main/java/com/hit/controller/UserController.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="1020" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MovieLandProj/src/main/java/com/hit/controller/UserController.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="1021" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MovieLandProj/src/main/java/com/hit/controller/UserController.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="1022" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MovieLandProj/src/main/java/com/hit/controller/UserController.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="1023" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MovieLandProj/src/main/java/com/hit/controller/UserController.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="1024" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MovieLandProj/src/main/java/com/hit/controller/UserController.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="1025" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/MovieLandProj/src/main/java/com/hit/controller/UserController.java</url>
+          <line>67</line>
+          <properties class="com.hit.controller.UserController" method="getLastUserId">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1019" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="movieToUpload.m_movieImage.value" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
