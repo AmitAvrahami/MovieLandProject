@@ -38,11 +38,13 @@ Screenshots
 <img width="221" alt="image" src="https://github.com/user-attachments/assets/513a0c39-6a69-4d05-9790-ba0aed2bb1a7"> <img width="221" alt="image" src="https://github.com/user-attachments/assets/64117e9f-b7c0-4226-a42d-0f935d04e8b2">.
 <img width="451" alt="image" src="https://github.com/user-attachments/assets/b06c8f09-7701-4274-ab30-c79082f5f233">.
 
+search for random movie.
 <img width="221" alt="image" src="https://github.com/user-attachments/assets/22a6d555-508d-4cc4-b391-e20e0e7ed91d"> <img width="293" alt="image" src="https://github.com/user-attachments/assets/a9250be5-7064-4ae4-8525-8a9e6f48ca51">
 
 <img width="448" alt="image" src="https://github.com/user-attachments/assets/3066ef67-1c79-4741-ab8e-3f22c222e86f">.
 <img width="489" alt="image" src="https://github.com/user-attachments/assets/9502e1e1-965e-462c-aaf2-93d2518fe1b1">.
-user watch list : 
+
+user watch list.
 <img width="530" alt="image" src="https://github.com/user-attachments/assets/9dabe416-1194-42fe-aeed-f5c4c76f0059">.
 
 
